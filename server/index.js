@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const PORT = 4000;
 
 const habitRoutes = express.Router();
 
 const Habit = require('./models/Habit');
+
+app.use(cors());
+app.use(bodyParser.json());
 
 habitRoutes.route('/').get(function(req, res) {
   Habit.find(function(err, habits) {
@@ -29,7 +34,7 @@ habitRoutes.route('/add').post(function(req, res) {
   habit
     .save()
     .then(habit => {
-      res.status(200).json({ habit: 'todo added successfully' });
+      res.status(200).json({ habit: 'habit added successfully' });
     })
     .catch(err => {
       res.status(400).send('adding new todo failed');

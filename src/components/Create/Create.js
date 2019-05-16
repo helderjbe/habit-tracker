@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-export default class CreateTodo extends Component {
+import axios from 'axios';
+
+export default class CreateHabit extends Component {
   state = {
     title: '',
     details: '',
@@ -24,6 +26,17 @@ export default class CreateTodo extends Component {
     console.log(`title: ${this.state.title}`);
     console.log(`details: ${this.state.details}`);
     console.log(`frequency: ${this.state.frequency}`);
+
+    const newTodo = {
+      title: this.state.title,
+      details: this.state.details,
+      frequency: this.state.frequency,
+      failed: this.state.failed
+    };
+
+    axios
+      .post('http://localhost:4000/habits/add', newTodo)
+      .then(res => console.log(res.data));
 
     this.setState({
       title: '',
