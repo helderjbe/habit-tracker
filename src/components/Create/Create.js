@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import axios from 'axios';
 
-export default class CreateHabit extends Component {
+class CreateHabit extends Component {
   state = {
     title: '',
     details: '',
@@ -20,23 +20,23 @@ export default class CreateHabit extends Component {
   };
 
   onSubmit = event => {
+    const { title, details, frequency, failed } = this.state;
+
     event.preventDefault();
 
     console.log(`Form submitted:`);
-    console.log(`title: ${this.state.title}`);
-    console.log(`details: ${this.state.details}`);
-    console.log(`frequency: ${this.state.frequency}`);
+    console.log(`title: ${title}`);
+    console.log(`details: ${details}`);
+    console.log(`frequency: ${frequency}`);
 
     const newTodo = {
-      title: this.state.title,
-      details: this.state.details,
-      frequency: this.state.frequency,
-      failed: this.state.failed
+      title,
+      details,
+      frequency,
+      failed
     };
 
-    axios
-      .post('http://localhost:4000/habits/add', newTodo)
-      .then(res => console.log(res.data));
+    axios.post('http://localhost:4000/habits/add', newTodo).then(res => console.log(res.data));
 
     this.setState({
       title: '',
@@ -47,27 +47,23 @@ export default class CreateHabit extends Component {
   };
 
   render() {
+    const { title, details, frequency } = this.state;
+
     return (
       <form onSubmit={this.onSubmit}>
-        <TextField
-          required
-          id="title"
-          label="Habit"
-          value={this.state.title}
-          onChange={this.onChangeState}
-        />
+        <TextField required id="title" label="Habit" value={title} onChange={this.onChangeState} />
         <TextField
           required
           id="details"
           label="Details"
-          value={this.state.details}
+          value={details}
           onChange={this.onChangeState}
         />
         <TextField
           required
           id="frequency"
           label="Frequency"
-          value={this.state.frequency}
+          value={frequency}
           onChange={this.onChangeState}
         />
         <Button type="submit" variant="contained" color="primary">
@@ -77,3 +73,5 @@ export default class CreateHabit extends Component {
     );
   }
 }
+
+export default CreateHabit;

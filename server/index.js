@@ -1,8 +1,10 @@
 const express = require('express');
+
 const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
 const PORT = 4000;
 
 const habitRoutes = express.Router();
@@ -12,8 +14,8 @@ const Habit = require('./models/Habit');
 app.use(cors());
 app.use(bodyParser.json());
 
-habitRoutes.route('/').get(function(req, res) {
-  Habit.find(function(err, habits) {
+habitRoutes.route('/').get((req, res) => {
+  Habit.find((err, habits) => {
     if (err) {
       console.log(err);
     } else {
@@ -22,27 +24,27 @@ habitRoutes.route('/').get(function(req, res) {
   });
 });
 
-habitRoutes.route('/:id').get(function(req, res) {
-  const id = req.params.id;
-  Habit.findById(id, function(err, habit) {
+habitRoutes.route('/:id').get((req, res) => {
+  const { id } = req.params;
+  Habit.findById(id, (err, habit) => {
     res.json(habit);
   });
 });
 
-habitRoutes.route('/add').post(function(req, res) {
+habitRoutes.route('/add').post((req, res) => {
   const habit = new Habit(req.body);
   habit
     .save()
-    .then(habit => {
+    .then(() => {
       res.status(200).json({ habit: 'habit added successfully' });
     })
-    .catch(err => {
+    .catch(() => {
       res.status(400).send('adding new todo failed');
     });
 });
 
-habitRoutes.route('/update/:id').post(function(req, res) {
-  Habit.findById(req.params.id, function(err, habit) {
+habitRoutes.route('/update/:id').post((req, res) => {
+  Habit.findById(req.params.id, (err, habit) => {
     if (!habit) {
       res.status(404).send('data is not found');
     } else {
@@ -54,10 +56,10 @@ habitRoutes.route('/update/:id').post(function(req, res) {
 
     habit
       .save()
-      .then(todo => {
+      .then(() => {
         res.json('Todo updated!');
       })
-      .catch(err => {
+      .catch(() => {
         res.status(400).send('Update not possible');
       });
   });
@@ -66,12 +68,12 @@ habitRoutes.route('/update/:id').post(function(req, res) {
 app.use('/habits', habitRoutes);
 
 mongoose.connect('mongodb://127.0.0.1:27017/habits', { useNewUrlParser: true });
-const connection = mongoose.connection;
+const { connection } = mongoose;
 
-connection.once('open', function() {
+connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
-app.listen(PORT, function() {
-  console.log('Server is running on Port: ' + PORT);
+app.listen(PORT, () => {
+  console.log(`Server is running on Port: ${PORT}`);
 });

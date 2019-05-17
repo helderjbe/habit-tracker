@@ -12,9 +12,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.16.4",
-    "mongoose": "^5.5.8"
-  },
-  "devDependencies": {
+    "mongoose": "^5.5.8",
     "cors": "^2.8.5"
   }
 }
