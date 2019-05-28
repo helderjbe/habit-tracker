@@ -39,7 +39,7 @@ habitRoutes.route('/add').post((req, res) => {
       res.status(200).json({ habit: 'habit added successfully' });
     })
     .catch(() => {
-      res.status(400).send('adding new todo failed');
+      res.status(400).send('adding new habit failed');
     });
 });
 
@@ -50,14 +50,14 @@ habitRoutes.route('/update/:id').post((req, res) => {
     } else {
       habit.title = req.body.title;
       habit.details = req.body.details;
-      habit.frequency = req.body.frequency;
-      habit.failed = req.body.failed;
+      habit.recurrence = req.body.recurrence;
+      habit.parent = req.body.parent;
     }
 
     habit
       .save()
       .then(() => {
-        res.json('Todo updated!');
+        res.json('Habit updated!');
       })
       .catch(() => {
         res.status(400).send('Update not possible');

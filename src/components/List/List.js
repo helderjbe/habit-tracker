@@ -24,10 +24,6 @@ const styles = theme => ({
   }
 });
 
-const createData = (title, details, frequency, failed) => {
-  return { title, details, frequency, failed };
-};
-
 class HabitList extends Component {
   state = {
     habits: []
@@ -48,10 +44,6 @@ class HabitList extends Component {
     const { classes } = this.props;
     const { habits } = this.state;
 
-    const rows = habits.map(habit =>
-      createData(habit.title, habit.details, habit.frequency, habit.failed)
-    );
-
     return (
       <Paper className={classes.root}>
         <Table className={classes.table}>
@@ -60,21 +52,19 @@ class HabitList extends Component {
               <TableCell>Habit</TableCell>
               <TableCell align="right">Details</TableCell>
               <TableCell align="right">Recurrence</TableCell>
-              <TableCell align="right">Status</TableCell>
               <TableCell align="right">Edit</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
-              <TableRow key={row.title}>
+            {habits.map(habit => (
+              <TableRow key={habit.title}>
                 <TableCell component="th" scope="row">
-                  {row.title}
+                  {habit.title}
                 </TableCell>
-                <TableCell align="right">{row.details}</TableCell>
-                <TableCell align="right">{row.frequency}</TableCell>
-                <TableCell align="right">{row.failed}</TableCell>
+                <TableCell align="right">{habit.details}</TableCell>
+                <TableCell align="right">{habit.recurrence}</TableCell>
                 <TableCell align="right">
-                  <Link to={`/edit/${row._id}`}>Edit</Link>
+                  <Link to={`/edit/${habit._id}`}>Edit</Link>
                 </TableCell>
               </TableRow>
             ))}
@@ -86,7 +76,7 @@ class HabitList extends Component {
 }
 
 HabitList.propTypes = {
-  classes: PropTypes.instanceOf(Array).isRequired
+  classes: PropTypes.instanceOf(Object).isRequired
 };
 
 export default withStyles(styles)(HabitList);

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const Habit = new Schema({
   title: {
@@ -8,11 +9,14 @@ const Habit = new Schema({
   details: {
     type: String
   },
-  frequency: {
+  recurrence: {
+    type: String
+  },
+  parent: {
     type: String
   },
   failed: {
-    type: Boolean
+    type: Map
   }
 });
 

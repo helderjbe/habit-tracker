@@ -9,8 +9,8 @@ class CreateHabit extends Component {
   state = {
     title: '',
     details: '',
-    frequency: '',
-    failed: false
+    recurrence: '',
+    parent: ''
   };
 
   onChangeState = event => {
@@ -20,34 +20,29 @@ class CreateHabit extends Component {
   };
 
   onSubmit = event => {
-    const { title, details, frequency, failed } = this.state;
+    const { title, details, recurrence, parent } = this.state;
 
     event.preventDefault();
 
-    console.log(`Form submitted:`);
-    console.log(`title: ${title}`);
-    console.log(`details: ${details}`);
-    console.log(`frequency: ${frequency}`);
-
-    const newTodo = {
+    const newObj = {
       title,
       details,
-      frequency,
-      failed
+      recurrence,
+      parent
     };
 
-    axios.post('http://localhost:4000/habits/add', newTodo).then(res => console.log(res.data));
+    axios.post('http://localhost:4000/habits/add', newObj).then(res => console.log(res.data));
 
     this.setState({
       title: '',
       details: '',
-      frequency: '',
-      failed: false
+      recurrence: '',
+      parent: ''
     });
   };
 
   render() {
-    const { title, details, frequency } = this.state;
+    const { title, details, recurrence } = this.state;
 
     return (
       <form onSubmit={this.onSubmit}>
@@ -61,9 +56,9 @@ class CreateHabit extends Component {
         />
         <TextField
           required
-          id="frequency"
-          label="Frequency"
-          value={frequency}
+          id="recurrence"
+          label="Recurrence"
+          value={recurrence}
           onChange={this.onChangeState}
         />
         <Button type="submit" variant="contained" color="primary">
