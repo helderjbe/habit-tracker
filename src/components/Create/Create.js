@@ -31,7 +31,9 @@ class CreateHabit extends Component {
       parent
     };
 
-    axios.post('http://localhost:4000/habits/add', newObj).then(res => console.log(res.data));
+    axios
+      .post(`${process.env.REACT_APP_API}/habits/add`, newObj)
+      .then(res => console.log(res.data));
 
     this.setState({
       title: '',

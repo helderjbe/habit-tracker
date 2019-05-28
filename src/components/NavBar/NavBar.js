@@ -34,7 +34,7 @@ function ButtonAppBar() {
           </IconButton>
           <div className={classes.title}>
             <ButtonBase component={Link} to="/">
-              <Typography variant="h6">{process.env.APP_TITLE}</Typography>
+              <Typography variant="h6">{process.env.REACT_APP_TITLE}</Typography>
             </ButtonBase>
           </div>
 

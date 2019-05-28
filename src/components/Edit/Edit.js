@@ -19,7 +19,7 @@ class EditHabit extends Component {
     const { match } = this.props;
 
     axios
-      .get(`http://localhost:4000/habits/${match.params.id}`)
+      .get(`${process.env.REACT_APP_API}/habits/${match.params.id}`)
       .then(response => {
         this.setState({
           title: response.data.title || '',
@@ -53,7 +53,7 @@ class EditHabit extends Component {
     };
 
     axios
-      .post(`http://localhost:4000/habits/update/${match.params.id}`, updatedObj)
+      .post(`${process.env.REACT_APP_API}/habits/update/${match.params.id}`, updatedObj)
       .then(res => console.log(res.data));
 
     history.push('/');

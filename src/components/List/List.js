@@ -31,7 +31,7 @@ class HabitList extends Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:4000/habits/')
+      .get(`${process.env.REACT_APP_API}/habits/`)
       .then(response => {
         this.setState({ habits: response.data });
       })
