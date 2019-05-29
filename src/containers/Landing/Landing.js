@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = () => ({
   first: {
     margin: '10% auto 0 auto',
-    textStroke: '1px #111'
+    textShadow: '2px 3px 5px #000000'
   }
 });
 
