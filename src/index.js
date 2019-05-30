@@ -20,9 +20,9 @@ const theme = createMuiTheme({
         },
         body: {
           height: '100%',
-          background: `linear-gradient(-45deg, #000, ${grey[800]}, #000)`,
+          background: `linear-gradient(-45deg, #000, ${grey[700]}, #000)`,
           'background-size': '400% 400%',
-          animation: 'Gradient 16s ease infinite'
+          animation: 'Gradient 15s ease infinite'
         },
         '@keyframes Gradient': {
           '0%': {
