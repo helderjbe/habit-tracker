@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const User = new Schema({
-  username: String,
-  password: String,
-  role: { type: String, enum: ['normal', 'admin'] },
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  role: { type: String, enum: ['normal', 'admin'], required: true },
   level: Number,
   lastUpdate: Date,
   habits: [{ type: Schema.Types.ObjectId, ref: 'Habit' }],
