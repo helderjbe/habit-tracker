@@ -9,7 +9,7 @@ class CreateHabit extends Component {
   state = {
     title: '',
     details: '',
-    recurrence: '',
+    recurrence: '', // days of the week - every x days
     parent: ''
   };
 
